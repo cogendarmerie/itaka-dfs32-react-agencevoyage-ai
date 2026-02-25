@@ -18,6 +18,7 @@ const TravelForm = () => {
     activityLevel: 3,
     budgetPerDay: 150,
     travelers: 1,
+    mode: 'onehotel', // onehotel, roadtrip
   });
 
   const handleChange = (e) => {
@@ -216,6 +217,22 @@ const TravelForm = () => {
                   className="w-full"
                   disabled={loading}
                 />
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Mode de voyage</label>
+                <select
+                  name="mode"
+                  value={formData.mode}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  disabled={loading}
+                >
+                  <option value="onehotel">Séjour en hôtel unique</option>
+                  <option value="roadtrip">Road trip avec plusieurs étapes</option>
+                </select>
               </div>
             </div>
 

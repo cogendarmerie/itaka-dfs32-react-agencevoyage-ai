@@ -12,6 +12,14 @@ const openaiClient = axios.create({
 });
 
 export const generateItinerary = async (preferences) => {
+  let modePrompt = '';
+
+  if (preferences.mode === 'roadtrip') {
+    modePrompt = 'Le voyage doit être un roadtrip, avec des étapes dans différentes villes ou régions. Assure-toi que les distances entre les étapes sont raisonnables pour une journée de conduite.';
+  } else {
+    modePrompt = 'Le voyage doit être un séjour dans un hôtel unique, avec des activités organisées autour de ce lieu. Assure-toi que les activités sont facilement accessibles depuis l\'hôtel.';
+  }
+
   const prompt = `Tu es un expert en planification de voyages. Génère un itinéraire de voyage détaillé basé sur les préférences suivantes :
 
 Dates de voyage: du ${preferences.startDate} au ${preferences.endDate}
@@ -20,6 +28,7 @@ Style de vacances: ${preferences.vacationStyle}
 Niveau d'activité: ${preferences.activityLevel}/5
 Budget par jour: ${preferences.budgetPerDay}€
 Nombre de voyageurs: ${preferences.travelers}
+Mode de voyage: ${modePrompt}
 
 Génère une réponse au format JSON strict (valide) avec la structure suivante :
 {
